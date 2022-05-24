@@ -1,0 +1,18 @@
+{
+    "@id": "dtmi:inmoov:head:eyes;1",
+    "@type": "Interface",
+    "displayName": "InMoov eyes - Interface Model",
+    "@context": "dtmi:dtdl:context;2",
+    "contents": [
+        {
+            "@type": "Component",
+            "name": "eyesUpDownServo",
+            "schema": "dtmi:inmoov:common:servo;1"
+        },
+        {
+            "@type": "Component",
+            "name": "eyesLRServo",
+            "schema": "dtmi:inmoov:common:servo;1"
+        }
+    ]
+}

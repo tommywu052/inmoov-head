@@ -1,0 +1,13 @@
+{
+    "@id": "dtmi:inmoov:head:neck;1",
+    "@type": "Interface",
+    "displayName": "InMoov Neck - Interface Model",
+    "@context": "dtmi:dtdl:context;2",
+    "contents": [
+        {
+            "@type": "Component",
+            "name": "neckServo",
+            "schema": "dtmi:inmoov:common:servo;1"
+        }
+    ]
+}

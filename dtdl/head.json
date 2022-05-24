@@ -1,0 +1,49 @@
+{
+    "@id": "dtmi:inmoov:head;1",
+    "@type": "Interface",
+    "displayName": "InMoov Head - Interface Model",
+    "@context": "dtmi:dtdl:context;2",
+    "contents": [
+        {
+            "@type": "Telemetry",
+            "name": "neckAngle",
+            "schema": "integer"
+        },
+        {
+            "@type": "Telemetry",
+            "name": "jawAngle",
+            "schema": "integer"
+        },
+        {
+            "@type": "Telemetry",
+            "name": "eyesLRAngle",
+            "schema": "integer"
+        },
+        {
+            "@type": "Telemetry",
+            "name": "eyesUpDownAngle",
+            "schema": "integer"
+        },
+        {
+            "@type": "Relationship",
+            "@id": "dtmi:inmoov:head:rel_has_neck;1",
+            "name": "rel_has_neck",
+            "displayName": "Has Neck",
+            "target": "dtmi:inmoov:head:neck;1"
+        },
+        {
+            "@type": "Relationship",
+            "@id": "dtmi:inmoov:head:rel_has_eyes;1",
+            "name": "rel_has_eyes",
+            "displayName": "Has eyes",
+            "target": "dtmi:inmoov:head:eyes;1"
+        },
+        {
+            "@type": "Relationship",
+            "@id": "dtmi:inmoov:head:rel_has_jaw;1",
+            "name": "rel_has_jaw",
+            "displayName": "Has jaw",
+            "target": "dtmi:inmoov:head:jaw;1"
+        }
+    ]
+}

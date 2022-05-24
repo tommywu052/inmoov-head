@@ -1,0 +1,36 @@
+{
+    "@context": "dtmi:dtdl:context;2",
+    "@id": "dtmi:inmoov:common:servo;1",
+    "@type": "Interface",
+    "displayName": "Servo motor interface in InMoov",
+    "contents": [
+        {
+            "@type": "Property",
+            "name": "model",
+            "displayName": "Servo motor model number",
+            "schema": "string",
+            "description": "Device model name or ID. Ex."
+        },
+        {
+            "@type": "Property",
+            "name": "minAngle",
+            "displayName": "Minimum Angle",
+            "schema": "integer",
+            "description": "Mininum angle value"
+        },
+        {
+            "@type": "Property",
+            "name": "maxAngle",
+            "displayName": "Maxium angle",
+            "schema": "integer",
+            "description": "Maximum angle value"
+        },
+        {
+            "@type": "Property",
+            "name": "angle",
+            "displayName": "Servo motor angle",
+            "schema": "integer",
+            "description": "angle value between minAngle and maxAngle"
+        }
+    ]
+}
