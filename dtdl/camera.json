@@ -1,0 +1,6 @@
+{
+    "@id": "dtmi:inmoov:common:camera;1",
+    "@type": "Interface",
+    "displayName": "InMoov eye's camera - Interface Model",
+    "@context": "dtmi:dtdl:context;2"
+}
