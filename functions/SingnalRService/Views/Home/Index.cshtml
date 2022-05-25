@@ -38,10 +38,12 @@
 
                 console.log(message);
 
-                $('#neck').val(message.neckAngle);
-                $('#jaw').val(message.jawAngle);
-                $('#eyelr').val(message.eyesLRAngle);
-                $('#eyeud').val(message.eyesUpDownAngle);
+                const msg = JSON.parse(message);
+
+                $('#neck').val(msg.neckAngle);
+                $('#jaw').val(msg.jawAngle);
+                $('#eyelr').val(msg.eyesLRAngle);
+                $('#eyeud').val(msg.eyesUpDownAngle);
 
             };
             connection.on('adtTelemetry', messageCallback);
