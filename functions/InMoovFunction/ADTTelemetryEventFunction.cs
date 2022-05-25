@@ -4,10 +4,15 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using Azure;
+using Azure.DigitalTwins.Core;
+using Azure.Identity;
 using Microsoft.AspNetCore.SignalR.Client;
 using Microsoft.Azure.EventHubs;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace InMoovFunction
 {
@@ -15,6 +20,7 @@ namespace InMoovFunction
     {
         private static HttpClient httpClient = new HttpClient();
         private static string Etag = string.Empty;
+        private static readonly string adtInstanceUrl = Environment.GetEnvironmentVariable("ADT_SERVICE_URL");
 
         [FunctionName("ADTTelemetryEventFunction")]
         public static async Task Run([EventHubTrigger("telemetry-event", Connection = "TelemetnryEHConnString")] EventData[] events, ILogger log)
@@ -40,6 +46,26 @@ namespace InMoovFunction
                     await connection.InvokeAsync("ADTTelemetry", messageBody);
 
                     log.LogInformation("Send msg to SignalR");
+
+                    //Authenticate with Digital Twins
+                    var cred = new DefaultAzureCredential();
+                    DigitalTwinsClient client = new DigitalTwinsClient(new Uri(adtInstanceUrl), cred);
+
+                    JObject msg = (JObject)JsonConvert.DeserializeObject(messageBody);
+
+                    // Update ADT properties. 
+                    var eyesTwinUpdate = new JsonPatchDocument();
+                    eyesTwinUpdate.AppendAdd("/eyesLRServo/angle", msg["eyesLRAngle"].Value<int>());
+                    eyesTwinUpdate.AppendAdd("/eyesUpDownServo/angle", msg["eyesUpDownAngle"].Value<int>());
+                    await client.UpdateDigitalTwinAsync("eyes", eyesTwinUpdate);
+
+                    var jawTwinUpdate = new JsonPatchDocument();
+                    jawTwinUpdate.AppendAdd("/neckServo/angle", msg["jawAngle"].Value<int>());
+                    await client.UpdateDigitalTwinAsync("jaw", jawTwinUpdate);
+
+                    var neckTwinUpdate = new JsonPatchDocument();
+                    neckTwinUpdate.AppendAdd("/neckServo/angle", msg["neckAngle"].Value<int>());
+                    await client.UpdateDigitalTwinAsync("neck", neckTwinUpdate);
 
                     await Task.Yield();
                 }
