@@ -3,8 +3,26 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="display-4">InMoov Head Monitoring</h1>
+    <img src="/img/head.jpg" class="img-thumbnail" alt="InMoov Head" style="width: 400px" >
+    <form class="row g-3">
+        <div class="col-md-6">
+            <label for="eyelr" class="form-label">Eye Left/Right</label>
+            <input type="text" class="form-control" id="eyelr" disabled>
+          </div>
+          <div class="col-md-6">
+            <label for="eyeud" class="form-label">Eye Up/Down</label>
+            <input type="text" class="form-control" id="eyeud" disabled>
+          </div>
+          <div class="col-12">
+            <label for="neck" class="form-label">Neck</label>
+            <input type="text" class="form-control" id="neck" disabled>
+          </div>
+          <div class="col-12">
+            <label for="jaw" class="form-label">Jaw</label>
+            <input type="text" class="form-control" id="jaw" disabled>
+          </div>
+    </form>
 </div>
 
 
@@ -19,6 +37,12 @@
                 }
 
                 console.log(message);
+
+                $('#neck').val(message.neckAngle);
+                $('#jaw').val(message.jawAngle);
+                $('#eyelr').val(message.eyesLRAngle);
+                $('#eyeud').val(message.eyesUpDownAngle);
+
             };
             connection.on('adtTelemetry', messageCallback);
         }
@@ -30,5 +54,7 @@
         connection.start()
                 .then(() => console.log("connected"))
                 .catch(error => console.error(error.message));
+
+                
     </script>
 }
