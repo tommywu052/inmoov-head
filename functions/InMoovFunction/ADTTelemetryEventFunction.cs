@@ -4,7 +4,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.AspNet.SignalR.Client;
+using Microsoft.AspNetCore.SignalR.Client;
 using Microsoft.Azure.EventHubs;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Extensions.Logging;
@@ -30,12 +30,16 @@ namespace InMoovFunction
                     // Replace these two lines with your processing logic.
                     log.LogInformation($"Telemetry Event Hub: {messageBody}");
 
-                    using(var hubConnection = new HubConnection(""))
-                    {
-                        IHubProxy telemetryHubProxy = hubConnection.CreateHubProxy("adt");
+                    // SignalR connection
+                    var url = Environment.GetEnvironmentVariable("signalRHubUrl");
+                    var connection = new HubConnectionBuilder()
+                                            .WithUrl(url)
+                                            .Build();
 
-                        await telemetryHubProxy.Invoke("ADTTelemetry", messageBody);
-                    }
+                    await connection.StartAsync();
+                    await connection.InvokeAsync("ADTTelemetry", messageBody);
+
+                    log.LogInformation("Send msg to SignalR");
 
                     await Task.Yield();
                 }
