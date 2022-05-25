@@ -29,11 +29,13 @@ var client = DeviceClient.fromConnectionString(connectionString, Mqtt);
 setInterval(function(){
   // Simulate telemetry.
   var jawAngle = 20 + (Math.random() * 15);
+  var neckAngle = 0 + (Math.random() * 10);
+  var eyelrAngle = 0 + (Math.random() * 10);
   var message = new Message(JSON.stringify({
-    "neckAngle": 0,
-    "eyesLRAngle": 0,
-    "eyesUpDownAngle": 20,
-    "jawAngle": jawAngle
+    "neckAngle": Math.ceil(neckAngle),
+    "eyesLRAngle": Math.ceil(eyelrAngle),
+    "eyesUpDownAngle": 0,
+    "jawAngle": Math.ceil(jawAngle)
   }));
 
   console.log('Sending message: ' + message.getData());
