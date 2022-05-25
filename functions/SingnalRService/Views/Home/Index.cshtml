@@ -6,3 +6,25 @@
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
+
+
+@section Scripts {
+    <script type="text/javascript">
+        function bindConnectionMessage(connection) {
+            var messageCallback = function (message) {
+                if (!message) {
+                    console.error("message is null");
+                    return;
+                }
+
+                console.log(message);
+            };
+            connection.on('adtTelemetry', messageCallback);
+            connection.onclose(onConnectionError);
+        }
+
+        const connection = new signalR.HubConnectionBuilder()
+                .withUrl('/adt')
+                .build();
+    </script>
+}
