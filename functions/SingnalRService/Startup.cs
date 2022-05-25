@@ -47,13 +47,13 @@ namespace SingnalRService
 
 
             app.UseRouting();
-
+            app.UseAuthorization(); 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapHub<ADTHub>("/adt");
             });
 
-            app.UseAuthorization();
+            
 
             app.UseEndpoints(endpoints =>
             {
