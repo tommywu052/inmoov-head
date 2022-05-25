@@ -21,11 +21,14 @@
                 console.log(message);
             };
             connection.on('adtTelemetry', messageCallback);
-            connection.onclose(onConnectionError);
         }
 
         const connection = new signalR.HubConnectionBuilder()
-                .withUrl('/adt')
+                .withUrl('https://adthol005.azurewebsites.net/adt')
                 .build();
+        bindConnectionMessage(connection);
+        connection.start()
+                .then(() => console.log("connected"))
+                .catch(error => console.error(error.message));
     </script>
 }
