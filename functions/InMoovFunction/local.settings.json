@@ -4,6 +4,7 @@
     "IoTHubConnectionString": "Endpoint=sb://iothub-ns-adtholhoth-18574683-8f51292929.servicebus.windows.net/;SharedAccessKeyName=iothubowner;SharedAccessKey=CKn18DAgdRjomNImHKz2JQ/1PxoWXsAZGcDN0fRRdL0=;EntityPath=adtholhothub005",
     "ADT_SERVICE_URL": "https://adthol005.api.sea.digitaltwins.azure.net",
     "AzureWebJobsStorage": "DefaultEndpointsProtocol=https;AccountName=adtholb2cd;AccountKey=8+AVoBpeBVTm01K/V3DnTCBYQMzARJ7SHyvLSG9ZbtBYAKlFMiqvhMbjMfGC/t9TDICnBziWIyDRTwSQ15J3+A==;EndpointSuffix=core.windows.net",
-    "TelemetnryEHConnString": "Endpoint=sb://adtholeh005.servicebus.windows.net/;SharedAccessKeyName=EHpolicy;SharedAccessKey=WkkxqtDQ8jzvuE1uaAD3DXt8CNHYVH7aBvP6P1ZwPtI=;EntityPath=telemetry-event"
+    "TelemetnryEHConnString": "Endpoint=sb://adtholeh005.servicebus.windows.net/;SharedAccessKeyName=EHpolicy;SharedAccessKey=WkkxqtDQ8jzvuE1uaAD3DXt8CNHYVH7aBvP6P1ZwPtI=;EntityPath=telemetry-event",
+    "SignalRConnString": "Endpoint=https://adt005signalr.service.signalr.net;AccessKey=jZoa7J4nTfFW/4C5Lqm/mD4Zo3XF0mHt7JOCBHCzjWA=;Version=1.0;"
   }
 }

@@ -1,8 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNet.SignalR.Client;
 using Microsoft.Azure.EventHubs;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Extensions.Logging;
@@ -11,6 +13,9 @@ namespace InMoovFunction
 {
     public static class ADTTelemetryEventFunction
     {
+        private static HttpClient httpClient = new HttpClient();
+        private static string Etag = string.Empty;
+
         [FunctionName("ADTTelemetryEventFunction")]
         public static async Task Run([EventHubTrigger("telemetry-event", Connection = "TelemetnryEHConnString")] EventData[] events, ILogger log)
         {
@@ -24,6 +29,14 @@ namespace InMoovFunction
 
                     // Replace these two lines with your processing logic.
                     log.LogInformation($"Telemetry Event Hub: {messageBody}");
+
+                    using(var hubConnection = new HubConnection(""))
+                    {
+                        IHubProxy telemetryHubProxy = hubConnection.CreateHubProxy("adt");
+
+                        await telemetryHubProxy.Invoke("ADTTelemetry", messageBody);
+                    }
+
                     await Task.Yield();
                 }
                 catch (Exception e)
